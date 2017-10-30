@@ -71,7 +71,7 @@ class Comment2Telegram_Plugin implements Typecho_Plugin_Interface
 
 		$callback_url = 'https://kanna.niconico.in/api/callback/notice/' . $options->plugin('Comment2Telegram')->callback_token;
 
-		$text = "{$comment->author} 在您的文章《{$comment->title}》中提交了评论：\n\n{$comment->text}\n\n回复：\n$comment->permalink";
+		$text = "{$comment->author} 在您的文章《{$comment->title}》中提交了评论：\n\n{$comment->text}\n\n回复：\n{$comment->permalink}";
 
 		$post_data = json_encode(
 			array(
