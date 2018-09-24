@@ -22,7 +22,7 @@ class Comment2Telegram_Plugin implements Typecho_Plugin_Interface
 		Typecho_Plugin::factory('Widget_Feedback')->finishComment = array('Comment2Telegram_Plugin', 'callback_send');
 		Typecho_Plugin::factory('Widget_Comments_Edit')->finishComment = array('Comment2Telegram_Plugin', 'callback_send');
 
-		return _t('请配置此插件的 token, 以使您的 Telegram 推送生效');
+		return _t('请配置此插件的 IFTTT Key, 以使您的 Telegram 推送生效');
 	}
 
 	/**
@@ -69,13 +69,13 @@ class Comment2Telegram_Plugin implements Typecho_Plugin_Interface
 	{
 		$options = Typecho_Widget::widget('Widget_Options');
 
-		$callback_url = 'https://kanna.niconico.in/api/callback/notice/' . $options->plugin('Comment2Telegram')->callback_token;
+		$callback_url = 'https://maker.ifttt.com/trigger/comment2telegram/with/key/' . $options->plugin('Comment2Telegram')->callback_token;
 
 		$text = "{$comment->author} 在您的文章《{$comment->title}》中提交了评论：\n\n{$comment->text}\n\n回复：\n{$comment->permalink}";
 
 		$post_data = json_encode(
 			array(
-				"text" => $text
+				"value1" => $text
 			)
 		);
 
